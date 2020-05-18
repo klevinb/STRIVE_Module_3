@@ -167,18 +167,32 @@ function largestIndex(array){
             index=i
         }
     }
-    console.log(max, i)
+    console.log(max, index)
 }
-
 /*
 14)
 
 Write a JavaScript program to get the largest even number from an array of integers.
+*/
 
+
+
+
+/*
 15)
 
 Write a JavaScript program to check two given numbers and return true if one of the number is 50 or if their sum is 50.
+*/
+function checkNumbers(nr1, nr2){
+    let sum= nr1+nr2
+    if(nr1 ===50 || nr2 === 50 || sum===50){
+        return true
+    }else{
+        return false
+    }
+}
 
+/*
 16)
 
 Write a JavaScript program to check from two given integers, whether one is positive and another one is negative.
@@ -186,11 +200,31 @@ Write a JavaScript program to check from two given integers, whether one is posi
 17)
 
 Write a JavaScript program to create new string with first 3 characters are in lower case and the others in upper case. If the string length is less than 3 convert all the characters in upper case. 
+*/
+function stringFunction(string){
+    let newString=""
+    if(string.length < 3){
+       newString = string.toUpperCase()
+    }else{       
+       newString = string.substring(0,3).toLowerCase()+string.substring(3).toUpperCase()
+    }
+    console.log(newString)
+}
 
+/*
 18)
 
 Write a JavaScript program to compute the sum of the two given integers, If the sum is in the range 50..80 return 65 other wise return 80.
-
+*/
+function sumOf2nr(nr1, nr2){
+    let sum = nr1 + nr2
+    if(sum >= 50 && sum <= 80){
+        return 65
+    }else{
+        return 80
+    }
+}
+/*
 19)
 
 Convert a number to a string, the contents of which depend on the number's factors.
