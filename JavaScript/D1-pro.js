@@ -8,6 +8,14 @@ commonly used in the string.
     maxChar("abcccccccd") === "c"
     maxChar("apple 1231111") === "1"
 
+    {
+        a: 1,
+        b: 1,
+        c: 7,
+        d: 1
+    }
+    charMap[char] + 1
+
 2) ANAGRAMS
 
 Check to see if two provided strings are anagrams of each other.
