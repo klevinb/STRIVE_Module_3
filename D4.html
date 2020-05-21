@@ -69,7 +69,7 @@
     <div class="container-fluid">
         <div class="container mt-5">
             <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" id="searchInput" placeholder="Search" aria-label="Search">
+                <input class="form-control mr-sm-2" id="searchInput" placeholder="Search" onkeyup="searchBooks()" aria-label="Search">
               </form>
             <div id="bookList" class="d-none">
                 <h1>Cart</h1>
@@ -93,13 +93,14 @@
         loadedBooks()
         
     }
-
+    var booksC=[]
     loadedBooks = () => {
         fetch("https://striveschool.herokuapp.com/books")
         .then(response => response.json())
         .then(books => {
             let reference = document.querySelector("#content")
             for(let i=0; i<50; i++){
+                booksC[i]= books[i]
                 reference.innerHTML += `
                     <div class="col">
                      <div class="card mb-3">
@@ -107,7 +108,7 @@
                          <img src="${books[i].img}" class="w-100" height="200px">
                          </a>
                          <div class="card-body">
-                       <div class="title" onclick="detailMe(${books[i].asin})"> ${books[i].title} </div>
+                       <div onclick="detailMe(${books[i].asin})"> ${books[i].title} </div>
                        </div>
                        <button class="addButton btn btn-primary">Add To Cart</button>
                        <button class="removeButton btn btn-secondary mt-2">Remove From Cart</button>
@@ -168,6 +169,34 @@
                 })
             }
     }
+
+    function searchBooks(){
+        let search = document.getElementById("searchInput").value.toLowerCase()
+        let reference = document.querySelector("#content")
+        reference.innerHTML=""
+
+        let searchedBooks = booksC.filter(book => book.title.toLowerCase().includes(search))
+        searchedBooks.forEach(currentBook => {
+                reference.innerHTML += `
+                    <div class="col">
+                     <div class="card mb-3">
+                        <a href="details.html?bookId=${currentBook.asin}">
+                         <img src="${currentBook.img}" class="w-100" height="200px">
+                         </a>
+                         <div class="card-body">
+                       <div onclick="detailMe(${currentBook.asin})"> ${currentBook.title} </div>
+                       </div>
+                       <button class="addButton btn btn-primary">Add To Cart</button>
+                       <button class="removeButton btn btn-secondary mt-2">Remove From Cart</button>
+                       <button class="deleteButton btn btn-danger mt-2">Not Interested</button>
+                     </div>
+                    </div>
+                 `
+            })
+            button()
+        }
+
+    
 </script>
 </body>
 
