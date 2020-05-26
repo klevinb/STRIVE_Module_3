@@ -99,7 +99,7 @@
         .then(response => response.json())
         .then(books => {
             let reference = document.querySelector("#content")
-            for(let i=0; i<50; i++){
+            for(let i=0; i<20; i++){
                 booksC[i]= books[i]
                 reference.innerHTML += `
                     <div class="col">
@@ -165,7 +165,7 @@
                         li.remove()
                     }
                     })
-                    referenceButtonDelete[i].closest("div").remove()
+                    event.currentTarget.parentNode.parentNode.style.display="none"
                 })
             }
     }
