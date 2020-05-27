@@ -71,7 +71,7 @@
     </nav>
     <div class="container-fluid">
         <div class="container">
-            <div id="products" class="row row-cols-2 row-cols-md-4 row-cols-lg-5 d-flex justify-content-center mt-5">
+            <div id="products" class="row row-cols-2 row-cols-md-4 row-cols-lg-5 d-flex justify-content-center mb-5 mt-5">
 
             </div>
         </div>
@@ -90,10 +90,10 @@
             let data = await getData()
             for(let i=1; i<data.length; i++ ){
                 reference.innerHTML +=`
-                <div class="col text-center mr-3">
+                <div class="col text-center mb-3 mr-3">
                     <div class="card" style="width: 12rem; border:0; font-size:12px;">
                         <a href="productDetails.html?id=${data[i]._id}"><img src=${data[i].imageUrl} class="card-img-top" height="250px" alt=${data[i].name} photo></a>
-                        <div class="card-body" style="max-height:200px;">
+                        <div class="card-body flex-direction-column">
                             <h6 class="card-title">${data[i].name}</h6>
                             <p class="card-text">${data[i].description.slice(0,40)}...</p>
                             <p class="card-text">Brand: ${data[i].brand}</p>
