@@ -75,9 +75,7 @@
             </div>
         </div>
     </div>
-
-
-    <!-- Optional JavaScript -->
+  <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -85,24 +83,7 @@
     <script src="./functions.js"></script>
     <script>
         window.onload = async () =>{
-            let reference = document.querySelector("#products")
-            let data = await getData()
-            for(let i=1; i<data.length; i++ ){
-                reference.innerHTML +=`
-                <div class="col text-center">
-                    <div class="card" style="width: 18rem;border:0">
-                        <a href="productDetails.html?id=${data.id}"><img src=${data[i].imageUrl} class="card-img-top" height="250px" alt=${data[i].name} photo></a>
-                        <div class="card-body" style="height:200px;">
-                            <h5 class="card-title">${data[i].name}</h5>
-                            <p class="card-text">${data[i].description.slice(0,60)}...</p>
-                            <p class="card-text">Brand: ${data[i].brand}</p>
-                            <h5 class="card-title">Price: ${data[i].price} $</h5>
-                            </div>
-                            <a href="#" class="btn btn-primary">Add to cart</a>
-                    </div>
-                </div>
-                ` 
-            }
+
         }
     </script>
 </body>
