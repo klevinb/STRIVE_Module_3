@@ -101,20 +101,22 @@
         event.preventDefault()
         submit()
       }
-      submit = () =>{
+      submit = async () =>{
         let Pname=document.querySelector("#name").value
         let Pdescription=document.querySelector("#description").value
         let Pbrand=document.querySelector("#brand").value
         let PimgUrl=document.querySelector("#imgUrl").value
         let Pprice=document.querySelector("#price").value
-        
-        let PmyProduct = {
+
+        let myProduct = {
           name: Pname,
           description: Pdescription,
           brand: Pbrand,
           imageUrl: PimgUrl,
           price: Pprice,
         }
+        console.log(myProduct)
+        let response = await sendProduct(myProduct)
       }
     </script>
   </body>

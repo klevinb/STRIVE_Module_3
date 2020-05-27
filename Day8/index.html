@@ -60,7 +60,14 @@
             <a class="nav-item nav-link" href="backoffice.html">BackOffice</a>
           </div>
         </div>
-      </nav>
+    </nav>
+    <div class="container-fluid">
+        <div class="container">
+            <div id="products" class="row row-cols-1  row-cols-md-4 row-cold-lg-6">
+
+            </div>
+        </div>
+    </div>
 
 
     <!-- Optional JavaScript -->
@@ -71,8 +78,24 @@
     <script src="./functions.js"></script>
     <script>
         window.onload = async () =>{
+            let reference = document.querySelector("#products")
             let data = await getData()
-            console.log(data)
+            for(let i=1; i<data.length; i++ ){
+                reference.innerHTML +=`
+                <div class="col text-center">
+                    <div class="card" style="width: 18rem;">
+                        <img src=${data[i].imageUrl} class="card-img-top" alt=${data[i].name} photo>
+                        <div class="card-body">
+                            <h5 class="card-title">${data[i].name}</h5>
+                            <p class="card-text">${data[i].description}</p>
+                            <p class="card-text">Brand: ${data[i].brand}</p>
+                            <h5 class="card-title">Price: ${data[i].price} $</h5>
+                            <a href="#" class="btn btn-primary">Add to cart</a>
+                        </div>
+                    </div>
+                </div>
+                ` 
+            }
         }
     </script>
 </body>
