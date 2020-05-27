@@ -57,7 +57,7 @@
           <div class="searchBox">
             <div class="form-inline my-2 my-lg-0">
               <input class="form-control mr-sm-2" id="userInput" onkeyup="filterUser()"  placeholder="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" id="searchButton">Search</button>
+              <button class="btn btn-outline-success my-2 my-sm-0" id="searchBtn">Search</button>
               <button class="btn btn-outline-success my-2 my-sm-0" id="sortButton">Sort</button>
             </div>
           </div>
@@ -79,8 +79,9 @@
         var response = await fetch("https://jsonplaceholder.typicode.com/users")
         var data = await response.json()
 
-        let button = document.querySelector("#searchButton")
+        let button = document.querySelector("#searchBtn")
         button.addEventListener("click", function(){
+
           let reference =  document.querySelector("#userList")
           let element =  document.getElementById("select")
           let selectedValue = element.options[element.selectedIndex].value

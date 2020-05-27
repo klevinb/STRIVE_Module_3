@@ -54,6 +54,12 @@
         .card img{
             object-fit: contain;
         }
+
+        .form-control:focus {
+            border: 1px solid #ced4da !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
     </style>
   </head>
   <body>
@@ -62,10 +68,13 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <a class="nav-item nav-link active" href="./">Home <span class="sr-only">(current)</span></a>
             <a class="nav-item nav-link" href="backoffice.html">BackOffice</a>
+          </div>
+          <div>
+              <input class="form-control mr-sm-2" id="userInput" onkeyup="filterProducts()" placeholder="Search">
           </div>
         </div>
     </nav>
@@ -86,9 +95,11 @@
     <script src="./functions.js"></script>
     <script>
         window.onload = async () =>{
-            let reference = document.querySelector("#products")
+            var reference = document.querySelector("#products")
             let data = await getData()
+            var products = []
             for(let i=1; i<data.length; i++ ){
+                products.push(data[i])
                 reference.innerHTML +=`
                 <div class="col text-center mb-3 mr-3">
                     <div class="card" style="width: 12rem; border:0; font-size:12px;">
@@ -102,6 +113,46 @@
                     </div>
                 </div>
                 ` 
+            }
+            filterProducts = () =>{
+                let userInput = document.querySelector("#userInput").value.toLowerCase()
+                let array = products.filter(product => product.name.toLowerCase().includes(userInput))
+                if(userInput.length>0){
+                    console.log(array)
+                    reference.innerHTML=""
+                    for(let i=0;i<array.length;i++){
+                    reference.innerHTML += `
+                    <div class="col text-center mb-3 mr-3">
+                        <div class="card" style="width: 12rem; border:0; font-size:12px;">
+                            <a href="productDetails.html?id=${array[i]._id}"><img src=${array[i].imageUrl} class="card-img-top" height="250px" alt=${array[i].name} photo></a>
+                            <div class="card-body flex-direction-column">
+                                <h6 class="card-title">${array[i].name}</h6>
+                                <p class="card-text">${array[i].description.slice(0,40)}...</p>
+                                <p class="card-text">Brand: ${array[i].brand}</p>
+                                <h6 class="card-title">Price: ${array[i].price} $</h6>
+                                </div>
+                        </div>
+                    </div>
+                    ` 
+                }
+                }else{
+                    reference.innerHTML=""
+                    for(let i=1; i<data.length; i++ ){
+                        reference.innerHTML +=`
+                        <div class="col text-center mb-3 mr-3">
+                            <div class="card" style="width: 12rem; border:0; font-size:12px;">
+                                <a href="productDetails.html?id=${data[i]._id}"><img src=${data[i].imageUrl} class="card-img-top" height="250px" alt=${data[i].name} photo></a>
+                                <div class="card-body flex-direction-column">
+                                    <h6 class="card-title">${data[i].name}</h6>
+                                    <p class="card-text">${data[i].description.slice(0,40)}...</p>
+                                    <p class="card-text">Brand: ${data[i].brand}</p>
+                                    <h6 class="card-title">Price: ${data[i].price} $</h6>
+                                    </div>
+                            </div>
+                        </div>
+                        ` 
+                    }
+                }
             }
         }
     </script>
