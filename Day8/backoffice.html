@@ -56,12 +56,39 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="./">Home <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="backoffice.html">BackOffice</a>
+            <a class="nav-item nav-link" href="./">Home</a>
+            <a class="nav-item nav-link active" href="backoffice.html">BackOffice <span class="sr-only">(current)</span></a>
           </div>
         </div>
       </nav>
-
+      <div class="container-fluid">
+        <div class="container">
+          <form onsubmit="handleSubmit()" class="text-center">
+            <div class="form-group">
+              <label for="name">Product Name</label>
+              <input type="text" class="form-control" id="name" placeholder="Product name">
+            </div>
+            <div class="form-group">
+              <label for="description">Product Description</label>
+              <input type="text" class="form-control" id="description" placeholder="Description of the product">
+            </div>
+            <div class="form-group">
+              <label for="brand">Product brand</label>
+              <input type="text" class="form-control" id="brand" placeholder="Brand of the product">
+            </div>
+            <div class="form-group">
+              <label for="imgUrl">Product photo</label>
+              <input type="text" class="form-control" id="imgUrl" placeholder="Image URL">
+              <small id="imageHelp" class="form-text text-muted">Please add an URL to your products image.</small>
+            </div>
+            <div class="form-group">
+              <label for="price">Product price $</label>
+              <input type="number" class="form-control" id="price" placeholder="$$$$$" min="0">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -70,10 +97,25 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="./functions.js"></script>
     <script>
-        window.onload = async () =>{
-            let data = await getData()
-            console.log(data)
+      handleSubmit = () =>{
+        event.preventDefault()
+        submit()
+      }
+      submit = () =>{
+        let Pname=document.querySelector("#name").value
+        let Pdescription=document.querySelector("#description").value
+        let Pbrand=document.querySelector("#brand").value
+        let PimgUrl=document.querySelector("#imgUrl").value
+        let Pprice=document.querySelector("#price").value
+        
+        let PmyProduct = {
+          name: Pname,
+          description: Pdescription,
+          brand: Pbrand,
+          imageUrl: PimgUrl,
+          price: Pprice,
         }
+      }
     </script>
-</body>
+  </body>
 </html>
