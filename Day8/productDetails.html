@@ -53,26 +53,28 @@
             margin: 0;
             padding: 0;
         }
+        #imgProduct img{
+          width: 400px;
+          height: 400px;
+        }
+
     </style>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#">ShopO</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="./">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="./">Home</a>
             <a class="nav-item nav-link" href="backoffice.html">BackOffice</a>
           </div>
         </div>
     </nav>
     <div class="container-fluid">
-        <div class="container">
-            <div id="products" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 mt-5">
-
-            </div>
+        <div id="product" class="container d-flex justify-content-center text-center mt-1">
         </div>
     </div>
   <!-- Optional JavaScript -->
@@ -83,6 +85,31 @@
     <script src="./functions.js"></script>
     <script>
         window.onload = async () =>{
+          const url = "https://striveschool.herokuapp.com/api/product/"
+          const user = "user16"
+          const password = "c9WEUxMS294hN6fF"
+          const headers = new Headers()
+          headers.set('Authorization', 'Basic ' + btoa(user + ":" + password))
+
+          let id = new URLSearchParams(document.location.search).get("id")
+          let response = await fetch(url+id,{
+            headers,
+          })
+          let data = await response.json()
+          let reference = document.querySelector("#product")
+
+          reference.innerHTML += `
+          <div id="imgProduct" class="m-4"">
+            <img src=${data.imageUrl}/>
+          </div>
+          <div class="m-4">
+            <h2>${data.name}</h2>
+            <p>${data.brand}</p>
+            <p>${data.description}</p>
+            <h2>Price: ${data.price} $</h2>
+            <a href="#" class="btn btn-primary">Buy Now</a>
+          </div>
+          `
 
         }
     </script>

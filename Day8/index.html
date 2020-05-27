@@ -49,15 +49,16 @@
     <title>Day8/Module3 - Strive</title>
     <style>
         .card:hover{
-            background-color: rgb(248, 244, 244);
-            margin: 0;
-            padding: 0;
+           transform: scale(1.1);
+        }
+        .card img{
+            object-fit: contain;
         }
     </style>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#">ShopO</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -70,7 +71,7 @@
     </nav>
     <div class="container-fluid">
         <div class="container">
-            <div id="products" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 mt-5">
+            <div id="products" class="row row-cols-2 row-cols-md-4 row-cols-lg-5 d-flex justify-content-center mt-5">
 
             </div>
         </div>
@@ -89,16 +90,15 @@
             let data = await getData()
             for(let i=1; i<data.length; i++ ){
                 reference.innerHTML +=`
-                <div class="col text-center">
-                    <div class="card" style="width: 18rem;border:0">
-                        <a href="productDetails.html?id=${data.id}"><img src=${data[i].imageUrl} class="card-img-top" height="250px" alt=${data[i].name} photo></a>
-                        <div class="card-body" style="height:200px;">
-                            <h5 class="card-title">${data[i].name}</h5>
-                            <p class="card-text">${data[i].description.slice(0,60)}...</p>
+                <div class="col text-center mr-3">
+                    <div class="card" style="width: 12rem; border:0; font-size:12px;">
+                        <a href="productDetails.html?id=${data[i]._id}"><img src=${data[i].imageUrl} class="card-img-top" height="250px" alt=${data[i].name} photo></a>
+                        <div class="card-body" style="max-height:200px;">
+                            <h6 class="card-title">${data[i].name}</h6>
+                            <p class="card-text">${data[i].description.slice(0,40)}...</p>
                             <p class="card-text">Brand: ${data[i].brand}</p>
-                            <h5 class="card-title">Price: ${data[i].price} $</h5>
+                            <h6 class="card-title">Price: ${data[i].price} $</h6>
                             </div>
-                            <a href="#" class="btn btn-primary">Add to cart</a>
                     </div>
                 </div>
                 ` 
