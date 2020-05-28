@@ -99,6 +99,24 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="./functions.js"></script>
     <script>
+
+      let id
+      window.onload = async () =>{
+
+        id = new URLSearchParams(document.location.search).get("id")
+        
+        
+        if(id){
+          let response = await getProduct(id);
+          document.querySelector("#name").value = response.name
+          document.querySelector("#description").value = response.description
+          document.querySelector("#brand").value = response.brand
+          document.querySelector("#imgUrl").value = response.imageUrl
+          document.querySelector("#price").value = response.price
+        }
+
+      }     
+
       handleSubmit = () =>{
         event.preventDefault()
         submit()
@@ -117,15 +135,27 @@
           imageUrl: PimgUrl,
           price: Pprice,
         }
-        let response = await sendProduct(myProduct)
 
-        if(response.ok){
+        let response
+        
+        if(id){
+          response = await editProduct(myProduct, id)
+
+          if(response.ok){
+          alert("The product was edited!")
+          location.assign("./index.html");
+          }else{
+            alert("There was a problem and the product cant be edited!")
+          }
+        }else{
+          response = await sendProduct(myProduct)
+          if(response.ok){
           alert("A new product was added!")
           location.assign("./index.html");
-        }else{
-          alert("There was a problem and the product cant be added!")
+          }else{
+            alert("There was a problem and the product cant be added!")
+          }
         }
-        
       }
     </script>
   </body>

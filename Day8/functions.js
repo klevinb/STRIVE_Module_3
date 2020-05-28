@@ -28,6 +28,15 @@ sendProduct = async (product) =>{
     return response
 }
 
+editProduct = async (product, id) =>{
+    let response = await fetch(url + id, {
+        method: "PUT",
+        body: JSON.stringify(product),
+        headers: headers
+      });
+    return response
+}
+
 deleteProduct = async (id) =>{
     let response = await fetch(url + id, {
         method: 'DELETE',

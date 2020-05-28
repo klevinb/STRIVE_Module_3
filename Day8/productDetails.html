@@ -102,6 +102,7 @@
             <h2>Price: ${response.price} $</h2>
             <a href="#" class="btn btn-primary">Buy Now</a>
             <button type="button" onclick="deleteBtn()" class="btn btn-danger">Delete Product</button>
+            <button type="button" onclick="editBtn()" class="btn btn-warning">Edit Product</button>
           </div>
           `
         }
@@ -111,6 +112,10 @@
               alert("Product was deleted")
               window.location.assign("./index.html")
             }
+        }
+
+        editBtn = async () =>{
+          window.location.href = "backoffice.html?id=" + id
         }
     </script>
 </body>

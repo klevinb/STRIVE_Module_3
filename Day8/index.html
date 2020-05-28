@@ -118,7 +118,6 @@
                 let userInput = document.querySelector("#userInput").value.toLowerCase()
                 let array = products.filter(product => product.name.toLowerCase().includes(userInput))
                 if(userInput.length>0){
-                    console.log(array)
                     reference.innerHTML=""
                     for(let i=0;i<array.length;i++){
                     reference.innerHTML += `
