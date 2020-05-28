@@ -84,33 +84,33 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="./functions.js"></script>
     <script>
+        let id
         window.onload = async () =>{
-          const url = "https://striveschool.herokuapp.com/api/product/"
-          const user = "user16"
-          const password = "c9WEUxMS294hN6fF"
-          const headers = new Headers()
-          headers.set('Authorization', 'Basic ' + btoa(user + ":" + password))
 
-          let id = new URLSearchParams(document.location.search).get("id")
-          let response = await fetch(url+id,{
-            headers,
-          })
-          let data = await response.json()
+          id = new URLSearchParams(document.location.search).get("id")
+          let response = await getProduct(id);
           let reference = document.querySelector("#product")
 
           reference.innerHTML += `
           <div id="imgProduct" class="m-4"">
-            <img src=${data.imageUrl}/>
+            <img src=${response.imageUrl}/>
           </div>
           <div class="m-4">
-            <h2>${data.name}</h2>
-            <p>${data.brand}</p>
-            <p>${data.description}</p>
-            <h2>Price: ${data.price} $</h2>
+            <h2>${response.name}</h2>
+            <p>${response.brand}</p>
+            <p>${response.description}</p>
+            <h2>Price: ${response.price} $</h2>
             <a href="#" class="btn btn-primary">Buy Now</a>
+            <button type="button" onclick="deleteBtn()" class="btn btn-danger">Delete Product</button>
           </div>
           `
-
+        }
+        deleteBtn = async () =>{
+            let response = await deleteProduct(id)
+            if(response.ok){
+              alert("Product was deleted")
+              window.location.assign("./index.html")
+            }
         }
     </script>
 </body>

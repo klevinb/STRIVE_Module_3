@@ -12,11 +12,26 @@ getData = async () =>{
     return await response.json()
 }
 
+getProduct = async (id) =>{
+    let response = await fetch(url+id,{
+        headers,
+    })
+    return await response.json()
+}
+
 sendProduct = async (product) =>{
     let response = await fetch(url, {
         method: "POST",
         body: JSON.stringify(product),
         headers: headers
       });
+    return response
+}
+
+deleteProduct = async (id) =>{
+    let response = await fetch(url + id, {
+        method: 'DELETE',
+        headers: headers,
+    })
     return response
 }
