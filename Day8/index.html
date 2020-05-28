@@ -45,11 +45,14 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <title>Day8/Module3 - Strive</title>
     <style>
         .card:hover{
            transform: scale(1.1);
+           box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 8px 0 rgba(0, 0, 0, 0.19);
+           z-index: 2;
         }
         .card img{
             object-fit: contain;
@@ -59,6 +62,28 @@
             border: 1px solid #ced4da !important;
             outline: none !important;
             box-shadow: none !important;
+        }
+        .spinner-border{
+            margin-top: 200px;
+            padding: 120px;
+        }
+        .shopIcon{
+            float: right;
+            font-size: 50px;
+            position: sticky;
+            padding-right: 20px;
+            padding-bottom: 20px;
+            right: 0;
+            bottom: 0;
+        }
+        .shopCart{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 3;
+            margin-top: -150px;
+            margin-left: -200px;
+            background-color: whitesmoke;
         }
     </style>
   </head>
@@ -81,8 +106,26 @@
     <div class="container-fluid">
         <div class="container">
             <div id="products" class="row row-cols-2 row-cols-md-4 row-cols-lg-5 d-flex justify-content-center mb-5 mt-5">
-
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
             </div>
+        </div>
+    </div>
+    <div class="shopIcon d-none">
+        <button type="button" id="cartIcon" style="border: 0; background-color: transparent;" data-toggle="modal" data-target="#userCart">
+            <i class="fa fa-shopping-cart"></i>
+        </button>
+    </div>
+    <div class="shopCart d-none">
+        <div>
+            <table id="table">
+                <tr>
+                    <th style="padding:10px">Name</th>
+                    <th style="padding:10px">Brand</th>
+                    <th>Price</th>
+                </tr>
+            </table>
         </div>
     </div>
 
@@ -94,10 +137,14 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="./functions.js"></script>
     <script>
+        let id
         window.onload = async () =>{
+            id = new URLSearchParams(document.location.search).get("id")
             var reference = document.querySelector("#products")
             let data = await getData()
             var products = []
+            let spinner = document.querySelector(".spinner-border")
+            spinner.classList.toggle("d-none")
             for(let i=0; i<data.length; i++ ){
                 products.push(data[i])
                 reference.innerHTML +=`
@@ -114,7 +161,7 @@
                 </div>
                 ` 
             }
-            filterProducts = () =>{
+            console.log(getArray())            filterProducts = () =>{
                 let userInput = document.querySelector("#userInput").value.toLowerCase()
                 let array = products.filter(product => product.name.toLowerCase().includes(userInput))
                 if(userInput.length>0){
