@@ -57,8 +57,12 @@
       .footer p{
         color: gray;
       }
-      #contentMovies img:hover{
-        transform: scale(0.9);
+
+      #contentMovies div.col-6:hover{
+        transform: scale(1.2);
+        z-index: 2;
+        border-radius: 30px;
+        overflow: hidden;
       }
 
     </style>
@@ -124,6 +128,7 @@
               </div>
             </nav>
             </div>
+            
     <div id="contentMovies" class="container-fluid px-3">
       <div class="header py-1">
         <h2>TV Shows</h2>
@@ -137,9 +142,14 @@
           </div>
       </div>
       </div>
+      <div class="container contentNone" style="height: 500px;">
+        <div class="spinner-border text-danger"style="position: absolute; top:50%; left:50%; font-size: 100px;" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
       <div id="movieGategory" class="container w-100 d-none">
         <div class="row row-cols-3 row-cols-md-5">
-
+            
         </div>
       </div>
 
@@ -147,7 +157,7 @@
 <!-- Footer -->
 <div class="footer pt-3 text-center " style="background-color:#141414;color: gray;">
   <footer class="footer mt-auto py-3">
-  <div class="container">
+  <div class="container-fluid">
   <div class="row ">
       <div class=" col-12 col-md-6 col-lg-3">
           <a href="#">
@@ -197,6 +207,7 @@
         id = new URLSearchParams(document.location.search).get("id")
         let contentMovies = document.querySelector("#contentMovies")
         if(id){
+          
           let categories = document.querySelectorAll("#contentMovies .container-fluid")
           let moviesCategory = await getMoviesCategory(id)
           console.log(moviesCategory)
@@ -217,8 +228,9 @@
             </div>
             </div>`
           })
-
+          document.querySelector(".contentNone").classList.toggle("d-none")
         }else{
+          
           let movies = await getMovies()
           movies.forEach(category =>{
             contentMovies.innerHTML+=`      
@@ -250,6 +262,7 @@
               </div>
             </div>`
           })
+          document.querySelector(".contentNone").classList.toggle("d-none")
           let categories = document.querySelectorAll("#contentMovies .container-fluid")
           let dropdownMenu = document.querySelector("#movieCategory")
           for(let i=0; i<categories.length; i++){

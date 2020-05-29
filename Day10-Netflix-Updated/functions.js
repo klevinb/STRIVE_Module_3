@@ -11,7 +11,7 @@ const getMovies = async () =>{
     return await response.json()
 }
 const getSpecificMovie = async (id) =>{
-    let response = await fetch(url+"/id/"+id,{
+    let response = await fetch(url+"id/"+id,{
         headers,
     })
     return await response.json()
@@ -36,6 +36,14 @@ const addMovie = async (movie) =>{
 const deleteMovie = async (movie) =>{
     let response = await fetch(url + movie, {
         method: "DELETE",
+        headers,
+    })
+    return response
+}
+const editMovie = async (movie, id) =>{
+    let response = await fetch(url+id,{
+        method: "PUT",
+        body: JSON.stringify(movie),
         headers,
     })
     return response
