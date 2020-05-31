@@ -133,11 +133,11 @@
       <div class="header py-1">
         <h2>TV Shows</h2>
         <div class="d-flex">
-          <div class="dropdown mr-1">
+          <div class="dropdown mr-1" id="movieCategory">
             <button type="button" style="background-color: black; border: 1px solid white;" class="btn py-1 btn-dark dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
               Genres
             </button>
-            <div class="dropdown-menu" id="movieCategory" aria-labelledby="dropdownMenuOffset">
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
             </div>
           </div>
       </div>
@@ -210,7 +210,13 @@
           
           let categories = document.querySelectorAll("#contentMovies .container-fluid")
           let moviesCategory = await getMoviesCategory(id)
+          let dropdownMenu = document.querySelector("#movieCategory .dropdown-menu")
+          let movieCategories = await getMovies()
+          document.querySelector("#movieCategory button").innerText = moviesCategory[0].category
           console.log(moviesCategory)
+          movieCategories.forEach(category =>{
+            dropdownMenu.innerHTML+=`<a class="dropdown-item" href="./index.html?id=${category}">${category}</a>`
+          })
           let reference = document.querySelector("#movieGategory")
           reference.classList.toggle("d-none")
           reference.classList.toggle("d-flex")
@@ -264,7 +270,7 @@
           })
           document.querySelector(".contentNone").classList.toggle("d-none")
           let categories = document.querySelectorAll("#contentMovies .container-fluid")
-          let dropdownMenu = document.querySelector("#movieCategory")
+          let dropdownMenu = document.querySelector("#movieCategory .dropdown-menu")
           for(let i=0; i<categories.length; i++){
             dropdownMenu.innerHTML+=`<a class="dropdown-item" href="./index.html?id=${movies[i]}">${movies[i]}</a>`
             let reference = document.querySelector(`#contentMovies .container-fluid #movies_${movies[i]}`)

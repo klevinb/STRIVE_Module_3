@@ -125,11 +125,11 @@
       <div class="header py-1">
         <h2>TV Shows</h2>
         <div class="d-flex">
-          <div class="dropdown mr-1">
+          <div class="dropdown mr-1" id="movieCategory">
             <button type="button" style="background-color: black; border: 1px solid white;" class="btn py-1 btn-dark dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
               Genres
             </button>
-            <div class="dropdown-menu" id="movieCategory" aria-labelledby="dropdownMenuOffset">
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
             </div>
           </div>
       </div>
@@ -197,6 +197,12 @@
             let contentMovies = document.querySelector("#movieGategory")
             contentMovies.classList.toggle("d-none")
             let movie = await getSpecificMovie(id)
+            let dropdownMenu = document.querySelector("#movieCategory .dropdown-menu")
+            document.querySelector("#movieCategory button").innerText = movie.category
+            let movieCategories = await getMovies()
+            movieCategories.forEach(category =>{
+              dropdownMenu.innerHTML+=`<a class="dropdown-item" href="./index.html?id=${category}">${category}</a>`
+            })
             console.log(movie)
             document.querySelector(".contentNone").classList.toggle("d-none")
             contentMovies.innerHTML+=`
