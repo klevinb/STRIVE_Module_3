@@ -117,26 +117,34 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="./functions.js"></script>
+    <script src="./index.js"></script>
     <script>
-        let id
+        let response
+        let cart = new ShoppingCart()
         window.onload = async () =>{
-            id = new URLSearchParams(document.location.search).get("id")
+
             var reference = document.querySelector("#products")
             let data = await getData()
             var products = []
             let spinner = document.querySelector(".spinner-border")
             spinner.classList.toggle("d-none")
+
             for(let i=0; i<data.length; i++ ){
                 products.push(data[i])
                 reference.innerHTML +=`
                 <div class="col text-center mb-3 mr-3">
                     <div class="card" style="width: 12rem; border:0; font-size:12px;">
-                        <a href="productDetails.html?id=${data[i]._id}"><img src=${data[i].imageUrl} class="card-img-top" height="250px" alt=${data[i].name} photo></a>
+                        <a href="productDetails.html?id=${data[i]._id}" target="_blank"><img src=${data[i].imageUrl} class="card-img-top" height="250px" alt=${data[i].name} photo></a>
                         <div class="card-body flex-direction-column">
                             <h6 class="card-title">${data[i].name}</h6>
                             <p class="card-text">${data[i].description.slice(0,40)}...</p>
                             <p class="card-text">Brand: ${data[i].brand}</p>
                             <h6 class="card-title">Price: ${data[i].price} $</h6>
+                            </div>
+                            <button type="button" id="${data[i]._id}" onclick="buyNow(event)" class="btn btn-danger mb-2">Buy Now</button>
+                            <div class="d-flex justify-content-between">
+                                <button type="button" id="${data[i]._id}" onclick="decrease(event)" class="btn btn-warning">Decrease</button>
+                                <button type="button" id="${data[i]._id}" onclick="increase(event)" class="btn btn-info">Increase</button>
                             </div>
                     </div>
                 </div>
@@ -151,12 +159,17 @@
                     reference.innerHTML += `
                     <div class="col text-center mb-3 mr-3">
                         <div class="card" style="width: 12rem; border:0; font-size:12px;">
-                            <a href="productDetails.html?id=${array[i]._id}"><img src=${array[i].imageUrl} class="card-img-top" height="250px" alt=${array[i].name} photo></a>
+                            <a href="productDetails.html?id=${array[i]._id}" target="_blank"><img src=${array[i].imageUrl} class="card-img-top" height="250px" alt=${array[i].name} photo></a>
                             <div class="card-body flex-direction-column">
                                 <h6 class="card-title">${array[i].name}</h6>
                                 <p class="card-text">${array[i].description.slice(0,40)}...</p>
                                 <p class="card-text">Brand: ${array[i].brand}</p>
                                 <h6 class="card-title">Price: ${array[i].price} $</h6>
+                                </div>
+                                <button type="button" id="${data[i]._id}" onclick="buyNow(event)" class="btn btn-danger mb-2">Buy Now</button>
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" id="${data[i]._id}" onclick="decrease(event)" class="btn btn-warning">Decrease</button>
+                                    <button type="button" id="${data[i]._id}" onclick="increase(event)" class="btn btn-info">Increase</button>
                                 </div>
                         </div>
                     </div>
@@ -164,16 +177,21 @@
                 }
                 }else{
                     reference.innerHTML=""
-                    for(let i=1; i<data.length; i++ ){
+                    for(let i=0; i<data.length; i++ ){
                         reference.innerHTML +=`
                         <div class="col text-center mb-3 mr-3">
                             <div class="card" style="width: 12rem; border:0; font-size:12px;">
-                                <a href="productDetails.html?id=${data[i]._id}"><img src=${data[i].imageUrl} class="card-img-top" height="250px" alt=${data[i].name} photo></a>
+                                <a href="productDetails.html?id=${data[i]._id}" target="_blank"><img src=${data[i].imageUrl} class="card-img-top" height="250px" alt=${data[i].name} photo></a>
                                 <div class="card-body flex-direction-column">
                                     <h6 class="card-title">${data[i].name}</h6>
                                     <p class="card-text">${data[i].description.slice(0,40)}...</p>
                                     <p class="card-text">Brand: ${data[i].brand}</p>
                                     <h6 class="card-title">Price: ${data[i].price} $</h6>
+                                    </div>
+                                    <button type="button" id="${data[i]._id}" onclick="buyNow(event)" class="btn btn-danger mb-2">Buy Now</button>
+                                    <div class="d-flex justify-content-between">
+                                        <button type="button" id="${data[i]._id}" onclick="decrease(event)" class="btn btn-warning">Decrease</button>
+                                        <button type="button" id="${data[i]._id}" onclick="increase(event)" class="btn btn-info">Increase</button>
                                     </div>
                             </div>
                         </div>
@@ -181,6 +199,21 @@
                     }
                 }
             }
+        }
+        buyNow = async (event) =>{
+            response = await getProduct(event.target.id)
+            cart.add(response)
+            cart.printShoppingCart()
+        }
+        increase = async (event) =>{
+            response = await getProduct(event.target.id)
+            cart.increase(response)
+            cart.printShoppingCart()
+        }
+        decrease = async (event) =>{
+            response = await getProduct(event.target.id)
+            cart.decrease(response)
+            cart.printShoppingCart()
         }
     </script>
 </body>
