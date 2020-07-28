@@ -1,7 +1,7 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-       <!--
+    <!--
             MY_CODE= user16:c9WEUxMS294hN6fF  
             You are building the new Amazon.
             This time you are also responsible for the back office.
@@ -40,68 +40,97 @@
 
         -->
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
 
     <title>Day8/Module3 - Strive</title>
     <style>
-        .card:hover{
-            background-color: rgb(248, 244, 244);
-            margin: 0;
-            padding: 0;
-        }
-        #imgProduct img{
-          width: 400px;
-          height: 400px;
-        }
-        .spinner-border{
-            margin-top: 200px;
-            padding: 120px;
-        }
-
+      .card:hover {
+        background-color: rgb(248, 244, 244);
+        margin: 0;
+        padding: 0;
+      }
+      #imgProduct img {
+        width: 400px;
+        height: 400px;
+      }
+      .spinner-border {
+        margin-top: 200px;
+        padding: 120px;
+      }
     </style>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">ShopO</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-item nav-link" href="./">Home</a>
-            <a class="nav-item nav-link" href="backoffice.html">BackOffice</a>
-          </div>
+      <a class="navbar-brand" href="#">ShopO</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="./">Home</a>
+          <a class="nav-item nav-link" href="backoffice.html">BackOffice</a>
         </div>
+      </div>
     </nav>
     <div class="container-fluid">
-        <div id="product" class="container d-flex justify-content-center text-center mt-1">
-          <div class="spinner-border" role="status">
-            <span class="sr-only">Loading...</span>
+      <div
+        id="product"
+        class="container d-flex justify-content-center text-center mt-1"
+      >
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
         </div>
-        </div>
+      </div>
     </div>
-  <!-- Optional JavaScript -->
+    <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+      integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+      crossorigin="anonymous"
+    ></script>
     <script src="./functions.js"></script>
     <script>
-        let id
-        let response
-        window.onload = async () =>{
+      let id;
+      let response;
+      window.onload = async () => {
+        id = new URLSearchParams(document.location.search).get("id");
+        response = await getProduct(id);
+        let reference = document.querySelector("#product");
+        let spinner = document.querySelector(".spinner-border");
+        spinner.classList.toggle("d-none");
 
-          id = new URLSearchParams(document.location.search).get("id")
-          response = await getProduct(id);
-          let reference = document.querySelector("#product")
-          let spinner = document.querySelector(".spinner-border")
-          spinner.classList.toggle("d-none")
-          
-          reference.innerHTML += `
+        reference.innerHTML += `
           <div id="imgProduct" class="m-4"">
             <img src=${response.imageUrl}/>
           </div>
@@ -113,17 +142,18 @@
             <button type="button" onclick="deleteBtn()" class="btn btn-danger">Delete Product</button>
             <button type="button" onclick="editBtn()" class="btn btn-warning">Edit Product</button>
           </div>
-          `
+          `;
+      };
+      deleteBtn = async () => {
+        let response = await deleteProduct(id);
+        if (response.ok) {
+          alert("Product was deleted");
+          window.location.assign("./index.html");
         }
-        deleteBtn = async () =>{
-            if(response.ok){
-              alert("Product was deleted")
-              window.location.assign("./index.html")
-            }
-        }
-        editBtn = async () =>{
-          window.location.href = "backoffice.html?id=" + id
-        }
+      };
+      editBtn = async () => {
+        window.location.href = "backoffice.html?id=" + id;
+      };
     </script>
-</body>
+  </body>
 </html>

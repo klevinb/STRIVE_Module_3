@@ -76,6 +76,12 @@
             right: 0;
             bottom: 0;
         }
+
+        #cart {
+            position: absolute;
+            right: 5%;
+            top: 10%;
+        }
        
     </style>
   </head>
@@ -96,6 +102,22 @@
         </div>
     </nav>
     <div class="container-fluid">
+        <div id="cart" class="d-none">
+            <div class="card" style="width: 25rem;">
+                <div class="card-body">
+                  <h5 class="card-title text-center">My Shopping Cart</h5>
+                  <hr>
+                  <table id="cartInfo">
+                      <tr>
+                          <th class="pr-5">Name</th>
+                          <th class="pr-5">Price</th>
+                          <th class="pr-5">Quantity</th>
+                          <th class="pr-5">Total</th>
+                      </tr>
+                </table>
+                </div>
+              </div>
+        </div>
         <div class="container">
             <div id="products" class="row row-cols-2 row-cols-md-4 row-cols-lg-5 d-flex justify-content-center mb-5 mt-5">
                 <div class="spinner-border" role="status">
@@ -203,7 +225,12 @@
         buyNow = async (event) =>{
             response = await getProduct(event.target.id)
             cart.add(response)
-            cart.printShoppingCart()
+            document.querySelector("#cart").classList.remove("d-none")
+            let cartInfo = document.querySelector("#cartInfo")
+            cartInfo.innerHTML =""
+            console.log(cart.items)
+                cartInfo.innerHTML += cart.printShoppingCart()   
+            
         }
         increase = async (event) =>{
             response = await getProduct(event.target.id)

@@ -14,15 +14,18 @@
       };
 
       this.printShoppingCart = function () {
-        console.log(`
-              items : ${this.items.map((item) => item.name).toString()}
-              count : ${this.items.length}
-              countItem : ${this.items.reduce(
-                (accum, item) => accum + item.quantity,
-                0
-              )}
-              total : ${this.calculateTotal()} €
-          `);
+        return `
+
+            <tr>
+                <td class="pr-5">${this.items.map((item) => item.name).toString()}</td>
+                <td class="pr-5">${response.price}</td>
+                <td class="pr-5">${this.items.reduce(
+                    (accum, item) => accum + item.quantity,
+                    0
+                    )}</td>
+                <td class="pr-5">${cart.calculateTotal()}</td>
+            </tr>
+          `
       };
 
       this.exists = function (item) {
